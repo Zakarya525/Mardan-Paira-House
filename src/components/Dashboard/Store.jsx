@@ -1,11 +1,12 @@
 import * as React from 'react';
+import {Link} from 'react-router-dom';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import {CardActionArea} from '@mui/material';
+import {CardActionArea, Button, CardActions} from '@mui/material';
 
-export default function Store() {
+export default function Store({title, description}) {
   return (
     <Card sx={{maxWidth: 345}}>
       <CardActionArea>
@@ -13,18 +14,24 @@ export default function Store() {
           component="img"
           height="140"
           image="/static/images/cards/contemplative-reptile.jpg"
-          alt="green iguana"
+          alt={title}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            Lizard
+            {title}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
+            {description}
           </Typography>
         </CardContent>
       </CardActionArea>
+      <CardActions>
+        <Link to="/AddProduct" state={{value: 'Product', accessToken: ''}}>
+          <Button size="small" color="primary">
+            Click to Add New Product
+          </Button>
+        </Link>
+      </CardActions>
     </Card>
   );
 }

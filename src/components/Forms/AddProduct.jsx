@@ -6,8 +6,7 @@ import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import {Button, Stack, TextField, Grow, Container} from '@mui/material';
 
 const AddProduct = () => {
-  const location = useLocation();
-  const {value} = location.state;
+  const {state} = useLocation();
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [selectedFile, setSelectedFile] = useState();
@@ -19,12 +18,6 @@ const AddProduct = () => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    axios.post(
-      'https://5764-37-111-134-98.ngrok.io/AddProduct',
-      {name: name, description: description},
-      (Headers = {headerkey: 'application/json'}),
-    );
     setName('');
     setDescription('');
   };
@@ -35,7 +28,7 @@ const AddProduct = () => {
         <TextField
           fullWidth
           id="fullWidth"
-          label={value.text}
+          label="Name"
           variant="outlined"
           value={name}
           margin="normal"
@@ -69,7 +62,7 @@ const AddProduct = () => {
             disabled={description.length < 20 || name.length < 1}
             variant="contained"
             sx={{m: '1rem'}}>
-            Add {value.text}
+            Add {state.value}
           </Button>
         </Stack>
       </Container>

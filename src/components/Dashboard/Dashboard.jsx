@@ -1,17 +1,19 @@
 import UserItem from './UserItem';
 import Navbar from '../Navbar';
+import Store from '../Dashboard/Store';
 import {Fragment, useEffect, useState} from 'react';
 import {Grid} from '@mui/material';
 import AddNew from './AddNew';
-import {useLocation} from 'react-router-dom';
+import {useLocation, useNavigate} from 'react-router-dom';
 import Image from '../images/admin.jpg';
 
 const Dashboard = () => {
   let {state} = useLocation();
-  const [user, setUser] =  useState({
-    username: "",
-    email: "",
-    store: {}
+  let navigate = useNavigate();
+  const [user, setUser] = useState({
+    username: '',
+    email: '',
+    store: {},
   });
 
   useEffect(() => {
@@ -22,10 +24,14 @@ const Dashboard = () => {
         Authorization: `Bearer ${state.token}`,
       },
     })
-        .then(res => res.json())
-        .then(user => {
-          setUser({username: user.username, email: user.email, store: user.store})
+      .then((res) => res.json())
+      .then((user) => {
+        setUser({
+          username: user.username,
+          email: user.email,
+          store: user.store,
         });
+      });
     document.body.style.background = '#f4f4f4';
   }, []);
 
@@ -40,7 +46,11 @@ const Dashboard = () => {
 
       <section className="dashboard-container">
         <Grid item>
-          <UserItem username={user.username} email={user.email} avatar_url={Image} />
+          <UserItem
+            username={user.username}
+            email={user.email}
+            avatar_url={Image}
+          />
         </Grid>
 
         {state === 'Products' ? (
@@ -49,9 +59,14 @@ const Dashboard = () => {
           </div>
         ) : (
           <div className="grid1">
-            {
-              user.store?.title ? user.store.title : <AddNew text="Store" token={state.token} path="/AddStore" />
-            }
+            {user.store?.title ? (
+              <Store
+                title={user.store.title}
+                description={user.store.description}
+              />
+            ) : (
+              <AddNew text="Store" token={state.token} path="/AddStore" />
+            )}
           </div>
         )}
       </section>
