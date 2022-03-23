@@ -28,7 +28,7 @@ export const SignUp = () => {
 
   const submitHandler = (data) => {
     console.log(data);
-    fetch('https://mph-backend.herokuapp.com/register', {
+    fetch('http://127.0.0.1:8000/register', {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',

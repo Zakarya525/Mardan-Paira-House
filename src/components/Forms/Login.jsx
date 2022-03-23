@@ -1,16 +1,9 @@
-import React, {Fragment, useState, useEffect} from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {Link, useNavigate} from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import {
-  Button,
-  Stack,
-  TextField,
-  CssBaseline,
-  Box,
-  Typography,
-} from '@mui/material';
-import {Grow, Fade} from '@material-ui/core';
+import {Box, Button, CssBaseline, TextField, Typography,} from '@mui/material';
+import {Grow} from '@material-ui/core';
 
 export const Login = () => {
   let navigate = useNavigate();
@@ -27,7 +20,7 @@ export const Login = () => {
   const [accessToken, setAccessToken] = useState('');
 
   const fetchUser = async (data) => {
-    const res = await fetch(`https://mph-backend.herokuapp.com/login`, {
+    const res = await fetch(`http://127.0.0.1:8000/login`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/x-www-form-urlencoded',
@@ -38,10 +31,7 @@ export const Login = () => {
     });
 
     const result = await res.json();
-
-    if (accessToken) {
-      navigate('/dashboard', {state: {token: accessToken, user: result}});
-    }
+    navigate('/dashboard', {state: {token: result.access_token}});
   };
 
   return (

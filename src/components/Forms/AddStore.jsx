@@ -1,10 +1,11 @@
 import React, {Fragment, useState} from 'react';
-import {useLocation} from 'react-router-dom';
+import {useLocation, useNavigate} from 'react-router-dom';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import {Button, Stack, TextField, Grow, Container} from '@mui/material';
 
 const AddStore = () => {
   const {state} = useLocation();
+  const {navigate} = useNavigate()
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [selectedFile, setSelectedFile] = useState();
@@ -16,13 +17,11 @@ const AddStore = () => {
   };
 
   const handleSubmit = async () => {
-    console.log(name);
-    console.log(description);
-    const response = await fetch('https://mph-backend.herokuapp.com/store', {
+    const response = await fetch('http://127.0.0.1:8000/store', {
       method: 'POST',
       headers: {
-        'content-type': 'applicaiton/json',
-        Authorization: `Bearer ${state.accessToken.token}`,
+        'content-type': 'application/json',
+        Authorization: `Bearer ${state.accessToken}`,
       },
       body: JSON.stringify({
         title: name,
@@ -30,14 +29,13 @@ const AddStore = () => {
       }),
     });
 
-    console.log(await response.json());
+    navigate('/dashboard', {state: {token: state.accessToken}});
 
     setName('');
     setDescription('');
   };
 
   return (
-    <Grow in={open}>
       <Container maxwidth="sm">
         <TextField
           fullWidth
@@ -67,7 +65,7 @@ const AddStore = () => {
             component="label"
             margin="normal"
             sx={{m: '1rem'}}>
-            <CameraAltIcon sx={{fontSize: '20px', mr: 1}}></CameraAltIcon>
+            <CameraAltIcon sx={{fontSize: '20px', mr: 1}}/>
             <input type="file" name="file" onChange={changeHandler} hidden />
             Select Image
           </Button>
@@ -81,7 +79,6 @@ const AddStore = () => {
           </Button>
         </Stack>
       </Container>
-    </Grow>
   );
 };
 
