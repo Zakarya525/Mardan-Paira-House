@@ -15,7 +15,7 @@ const Dashboard = () => {
   });
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:8000/users/me`, {
+    fetch(`https://mph-backend.herokuapp.com/users/me`, {
       method: 'GET',
       headers: {
         'Content-type': 'application/json',

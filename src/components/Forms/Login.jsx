@@ -20,7 +20,7 @@ export const Login = () => {
   const [accessToken, setAccessToken] = useState('');
 
   const fetchUser = async (data) => {
-    const res = await fetch(`http://127.0.0.1:8000/login`, {
+    const res = await fetch(`https://mph-backend.herokuapp.com/login`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/x-www-form-urlencoded',
