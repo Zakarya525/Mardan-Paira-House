@@ -1,7 +1,5 @@
-import axios from 'axios';
-import React, {Fragment, useState} from 'react';
+import React, {useState} from 'react';
 import {useLocation} from 'react-router-dom';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import {Button, Stack, TextField, Grow, Container} from '@mui/material';
 
@@ -17,14 +15,28 @@ const AddProduct = () => {
     setIsSelected(true);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async () => {
+    const response = await fetch('https://mph-backend.herokuapp.com/products', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        Authorization: `Bearer ${state.accessToken}`,
+      },
+      body: JSON.stringify({
+        name: name,
+        description: description,
+        price: '400$',
+      }),
+    });
+
+    console.log(response);
     setName('');
     setDescription('');
   };
 
   return (
-    <Grow in={open}>
-      <Container maxwidth="sm" onSubmit={handleSubmit}>
+    <Grow in={true}>
+      <Container maxwidth="sm">
         <TextField
           fullWidth
           id="fullWidth"
@@ -59,6 +71,7 @@ const AddProduct = () => {
           </Button>
 
           <Button
+            onClick={handleSubmit}
             disabled={description.length < 20 || name.length < 1}
             variant="contained"
             sx={{m: '1rem'}}>

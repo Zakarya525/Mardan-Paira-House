@@ -10,6 +10,7 @@ import AddStore from './components/Forms/AddStore';
 import AddProduct from './components/Forms/AddProduct';
 import Loading from './components/Loading';
 import UserProfile from './components/UserProfile/UserProfile';
+import Products from './components/Dashboard/Products/products';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/profile" element={<UserProfile />} />
+        <Route path="/products" element={<Products />} />
         <Route path="/AddStore" element={<AddStore />} />
         <Route path="/AddProduct" element={<AddProduct />} />
         <Route path="*" element={<Error />} />

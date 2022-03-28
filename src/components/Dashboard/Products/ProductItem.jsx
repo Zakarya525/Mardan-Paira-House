@@ -7,7 +7,6 @@ import {
   Button,
   Typography,
 } from '@mui/material';
-import Image from '../Products/pro1.jpg';
 
 const Products = () => {
   return (

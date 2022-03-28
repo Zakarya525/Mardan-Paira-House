@@ -55,6 +55,7 @@ const Dashboard = () => {
 
         {state === 'Products' ? (
           <div className="grid1">
+            {/* Will be Adding <Products /> here */}
             <AddNew text="Product" path="/AddProduct" />
           </div>
         ) : (
@@ -63,6 +64,7 @@ const Dashboard = () => {
               <Store
                 title={user.store.title}
                 description={user.store.description}
+                token={state.token}
               />
             ) : (
               <AddNew text="Store" token={state.token} path="/AddStore" />

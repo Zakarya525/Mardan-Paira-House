@@ -2,7 +2,7 @@ import React, {Fragment, useEffect, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {Link, useNavigate} from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import {Box, Button, CssBaseline, TextField, Typography,} from '@mui/material';
+import {Box, Button, CssBaseline, TextField, Typography} from '@mui/material';
 import {Grow} from '@material-ui/core';
 
 export const Login = () => {
@@ -30,8 +30,10 @@ export const Login = () => {
       ),
     });
 
-    const result = await res.json();
-    navigate('/dashboard', {state: {token: result.access_token}});
+    if (res.ok) {
+      const result = await res.json();
+      navigate('/dashboard', {state: {token: result.access_token}});
+    }
   };
 
   return (
