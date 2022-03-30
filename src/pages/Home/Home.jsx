@@ -10,7 +10,7 @@ const Home = () => {
             <div className="container">
                 <Nav />
                 <div>
-                    <h1 className="lead">Mardan Paira House</h1>
+                    <h1 className="lead">Mardan Paira House Location</h1>
                     <Typography
                         color={'white'}
                         variant="body2"
